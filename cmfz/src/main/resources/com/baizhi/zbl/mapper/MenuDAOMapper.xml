@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.zbl.dao.MenuDAO">
+    <resultMap id="menuMap" type="Menu">
+        <id column="pid" property="id"/>
+        <result column="ptitle" property="title"/>
+        <result column="pcontent" property="content"/>
+        <result column="phref" property="href"/>
+        <result column="piconCls" property="iconCls"/>
+        <collection property="menus"  ofType="Menu">
+            <id column="cid" property="id"/>
+            <result column="ctitle" property="title"/>
+            <result column="ccontent" property="content"/>
+            <result column="chref" property="href"/>
+            <result column="ciconCls" property="iconCls"/>
+        </collection>
+    </resultMap>
+   <!-- <sql id="sql">
+        select p.id pid,p.title ptitle,p.content pcontent,p.href phref,p.iconCls piconCls,
+               c.id cid,c.title ctitle,c.content ccontent,c.href chref,c.iconCls ciconCls
+    </sql>
+    <select id="queryAll" resultMap="menuMap">
+        select <include refid="sql"/>
+        from menu p INNER JOIN menu c
+        ON p.id=c.cid
+    </select>
+-->
+    <select id="queryAll" resultMap="menuMap">
+        select p.id pid,p.title ptitle,p.content pcontent,p.href phref,p.iconCls piconCls,
+               c.id cid,c.title ctitle,c.content ccontent,c.href chref,c.iconCls ciconCls
+        from menu p INNER JOIN (SELECT id,title,content,href,iconCls,parentId FROM menu) c
+        ON  p.id=c.parentId
+        WHERE p.parentId IS NULL;
+    </select>
+</mapper>
+
+
+
+
+
+
+
