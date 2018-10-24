@@ -49,7 +49,7 @@
                 title: title,
                 selected: true,
                 closable:true,
-                href:"${pageContext.request.contextPath}"+href
+                href:"${pageContext.request.contextPath}/"+href
             });
         }
 

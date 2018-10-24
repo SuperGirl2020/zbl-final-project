@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.zbl.dao.BannerDAO">
+    <select id="queryAll" resultType="Banner">
+        select * from banner
+    </select>
+    <select id="queryByPage" resultType="Banner">
+        select * FROM banner
+        LIMIT #{beginIndex},#{rows}
+    </select>
+    <insert id="insert">
+        INSERT INTO banner VALUES (#{id},#{title},#{imgPath},#{description},#{status},#{createDate})
+    </insert>
+    <delete id="delete">
+        DELETE FROM banner WHERE id=#{id}
+    </delete>
+    <update id="update">
+        UPDATE banner SET id=#{id},title=#{title},imgPath=#{imgPath},description=#{description},status=#{status},createDate=#{createDate}
+        where id=#{id}
+    </update>
+    <select id="queryById" parameterType="Integer" resultType="Banner">
+        select * from banner
+        where id=#{id}
+    </select>
+</mapper>
+
+
+
+
+
+
+

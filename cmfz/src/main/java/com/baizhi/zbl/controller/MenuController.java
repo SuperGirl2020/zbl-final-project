@@ -31,10 +31,5 @@ public class MenuController {
         List<Menu> menus=menuService.queryAll();
         return menus;
     }
-    /*public String queryAll(Model model){
-        List<Menu> menus=menuService.queryAll();
-        model.addAttribute("menus",menus);
-        return "back/main";
-    }*/
 
 }
