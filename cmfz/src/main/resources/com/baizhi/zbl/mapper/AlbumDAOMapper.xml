@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.zbl.dao.AlbumDAO">
+
+    <resultMap id="albumMap" type="Album">
+        <id column="aid" property="id"/>
+        <result column="atitle" property="title"/>
+        <result column="count" property="count"/>
+        <result column="coverImg" property="coverImg"/>
+        <result column="score" property="score"/>
+        <result column="author" property="author"/>
+        <result column="broadCast" property="broadCast"/>
+        <result column="brief" property="brief"/>
+        <result column="createDate" property="createDate"/>
+        <result column="publishDate" property="publishDate"/>
+        <result column="status" property="status"/>
+        <collection property="children" ofType="Chapter">
+            <id column="cid" property="id"/>
+            <result column="ctitle" property="title"/>
+            <result column="duration" property="duration"/>
+            <result column="size" property="size"/>
+            <result column="audioPath" property="audioPath"/>
+            <result column="albumId" property="albumId"/>
+        </collection>
+    </resultMap>
+
+    <insert id="insert" parameterType="Album">
+        insert into album(id,title,count,coverImg,score,author,broadCast,brief,createDate,publishDate,status)
+        values(#{id},#{title},#{count},#{coverImg},#{score},#{author},#{broadCast},#{brief},#{createDate},#{publishDate},#{status})
+       /*insert into album
+       values(#{id},#{title},#{count},#{coverImg},#{score},#{author},#{broadCast},#{brief},#{createDate},#{publishDate},#{status})*/
+    </insert>
+
+    <delete id="delete" parameterType="Integer">
+        delete from album where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="Album">
+        update album set count=#{count} where id=#{id}
+    </update>
+
+    <select id="queryById" parameterType="Integer" resultType="Album">
+        select a.id,a.title,a.count,a.coverImg,a.score ,a.author,a.broadCast ,a.brief ,a.createDate,a.publishtDate ,a.status
+        from album a
+        where id=#{id}
+    </select>
+
+    <select id="queryAll"  resultMap="albumMap">
+        select a.id aid,a.title atitle,a.count count,a.coverImg coverImg,a.score score,a.author author,a.broadCast broadCast,a.brief brief,a.createDate createDate,a.publishDate publishDate,a.status status,
+               c.id cid,c.title ctitle,c.duration duration,c.size size,c.audioPath audioPath
+        from album a
+        left join chapter c
+        on c.albumId=a.id
+    </select>
+
+    <select id="queryByPage" resultMap="albumMap">
+        select a.id aid,a.title atitle,a.count count,a.coverImg coverImg,a.score score,a.author author,a.broadCast broadCast,a.brief brief,a.createDate createDate,a.publishDate publishDate,a.status status,
+               c.id cid,c.title ctitle,c.duration duration,c.size size,c.audioPath audioPath
+        from album a
+        left join chapter c
+        on c.albumId=a.id
+        limit #{beginIndex},#{rows}
+    </select>
+</mapper>
+
+
+
+
+
+
+

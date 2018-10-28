@@ -18,17 +18,19 @@ public class Banner implements Serializable{
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    private String oldName;
 
     public Banner() {
     }
 
-    public Banner(Integer id, String title, String imgPath, String description, String status, Date createDate) {
+    public Banner(Integer id, String title, String imgPath, String description, String status, Date createDate, String oldName) {
         this.id = id;
         this.title = title;
         this.imgPath = imgPath;
         this.description = description;
         this.status = status;
         this.createDate = createDate;
+        this.oldName = oldName;
     }
 
     public Integer getId() {
@@ -79,6 +81,14 @@ public class Banner implements Serializable{
         this.createDate = createDate;
     }
 
+    public String getOldName() {
+        return oldName;
+    }
+
+    public void setOldName(String oldName) {
+        this.oldName = oldName;
+    }
+
     @Override
     public String toString() {
         return "Banner{" +
@@ -88,6 +98,7 @@ public class Banner implements Serializable{
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
                 ", createDate=" + createDate +
+                ", oldName='" + oldName + '\'' +
                 '}';
     }
 }

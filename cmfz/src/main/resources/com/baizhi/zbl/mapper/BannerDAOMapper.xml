@@ -8,14 +8,17 @@
         select * FROM banner
         LIMIT #{beginIndex},#{rows}
     </select>
-    <insert id="insert">
-        INSERT INTO banner VALUES (#{id},#{title},#{imgPath},#{description},#{status},#{createDate})
+    <insert id="insert" parameterType="Banner">
+        <selectKey keyProperty="id" resultType="Integer" order="AFTER">
+            SELECT last_insert_id()
+        </selectKey>
+        INSERT INTO banner(title,imgPath,description,status,createDate,oldName) VALUES (#{title},#{imgPath},#{description},#{status},#{createDate},#{oldName})
     </insert>
-    <delete id="delete">
+    <delete id="delete" parameterType="Integer">
         DELETE FROM banner WHERE id=#{id}
     </delete>
-    <update id="update">
-        UPDATE banner SET id=#{id},title=#{title},imgPath=#{imgPath},description=#{description},status=#{status},createDate=#{createDate}
+    <update id="update" parameterType="Banner">
+        UPDATE banner SET status=#{status}
         where id=#{id}
     </update>
     <select id="queryById" parameterType="Integer" resultType="Banner">

@@ -5,7 +5,8 @@
   Time: 20:28
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript">
     $(function () {
         var toolbar = [{
@@ -16,15 +17,17 @@
             }
         }, '-', {
             text: "删除",
-            iconCls: 'icon-delete',
+            iconCls: 'icon-cut',
             handler: function () {
                 var row = $("#dg").edatagrid("getSelected");
+                var flag = window.confirm("确定要删除吗？");
                 if(row!=null){
                     var index = $("#dg").edatagrid("getRowIndex", row);
                     $("#dg").edatagrid("deleteRow", index)
                 }else{
                     alert("请先选中行")
                 }
+
             }
         }, '-', {
             text: "修改",
@@ -71,12 +74,12 @@
                 }
                 },
                 {field: 'createDate', title: '时间', width: 88},
-                {field:'operate',title:'操作',width:88,align:'center',
+               /* {field:'operate',title:'操作',width:88,align:'center',
                     formatter: function(value,row,index){
                         var temp=JSON.stringify(row).replace(/\"/g,"'");
                         return '<a class="del"  style="color: darkblue;" onclick="del('+temp+')"> 删除 </a>';
                     }
-                },
+                },*/
             ]],
             striped:true,
             fit:true,
@@ -88,7 +91,7 @@
             pagination: true,
             pagePosition:'both',
             pageSize: 5,
-            pageList: [5, 10,15,20],
+            pageList: [5, 10,15,20,25],
             toolbar: toolbar,
             view: detailview,
             detailFormatter: function (rowIndex, rowData) {
@@ -109,14 +112,19 @@
         })
     }
 </script>
-<table id="dg">
-    <h1 style="text-align: center;color: #000;background-color: darkred">
-        Don't forget, a person's greatest emotional need is to feel appreciated.
-        <p>莫忘记，人类情感上最大的需要是感恩。-----好</p>
-    </h1>
+
+<table id="dg" style="width:600px;height:200px"
+       title="Editable DataGrid"
+       singleSelect="true">
+    <thead>
+
+    </thead>
 </table>
+
 <div id="dd" class="easyui-dialog" title="Make America peace!" style="width:400px;height:200px;"
-     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true,buttons:[{
+     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true,buttons:[
+
+            {
 				text:'保存',
 				handler:function(){
                      submit();
@@ -136,7 +144,7 @@
         </div>
         <div>
             <label for="content">description:</label>
-            <input class="easyui-textbox" type="text" id="content" name="content" data-options=""/>
+            <input class="easyui-textbox" type="text" id="content" name="content" data-options="required:true"/>
         </div>
         <div>
             <select id="cc" class="easyui-combobox" name="status" style="width:200px;">
@@ -149,4 +157,3 @@
         </div>
     </form>
 </div>
-

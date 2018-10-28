@@ -74,7 +74,7 @@
 			</tbody></table>
 		<div class="powered">COPYRIGHT © 2008-2017.</div>
 		<div class="link">
-			<a href="${pageContext.request.contextPath}/back/main.jspn.jsp">持名佛网首页</a> |
+			<a href="${pageContext.request.contextPath}/back/main1.jsp">持名佛网首页</a> |
 			<a href="http://www.chimingbbs.com/">交流论坛</a> |
 			<a href="">关于我们</a> |
 			<a href="">联系我们</a> |

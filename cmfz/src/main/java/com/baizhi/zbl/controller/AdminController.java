@@ -47,7 +47,7 @@ public class AdminController {
     @RequestMapping("/update.do")
     public String update(Admin admin){
         adminService.update(admin);
-        return "back/main";
+        return "back/main1";
     }
 
     @ResponseBody

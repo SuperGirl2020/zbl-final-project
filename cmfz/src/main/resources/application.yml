@@ -16,6 +16,9 @@ spring:
     encoding:
       charset: UTF-8
       force: true
+    multipart:
+      max-file-size: 50Mb
+      max-request-size: 50Mb
   mvc:
     view:
       prefix: /
